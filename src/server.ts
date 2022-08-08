@@ -29,7 +29,7 @@ import { url } from 'inspector';
   //   the filtered image file [!!TIP res.sendFile(filteredpath); might be useful]
 
   /**************************************************************************** */
-  app.get("/filteredimage", async ( req, res ) => {
+  app.get("/filteredimage", async (req:express.Request, res:express.Response) => {
     const image_url = req.query.image_url;
     const isImage = (param: string) => {
       return /\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(param);
@@ -41,11 +41,11 @@ import { url } from 'inspector';
           deleteLocalFiles([url]);
         });
       }).catch(err => {
-        res.send("can't filter image" + err);
+        res.status(200).send("can't filter image" + err);
       });
 
     } else {
-      res.send("Invalid data");
+      res.status(500).send("Invalid data");
     }
 
 
