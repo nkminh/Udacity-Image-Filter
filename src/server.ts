@@ -36,12 +36,12 @@ import { url } from 'inspector';
     }
     if (isImage(image_url) === true) {
       await filterImageFromURL(image_url).then(url => {
-        res.sendFile(url, () => {
+        res.status(200).sendFile(url, () => {
           // callback to delete
           deleteLocalFiles([url]);
         });
       }).catch(err => {
-        res.status(200).send("can't filter image" + err);
+        res.status(400).send("can't filter image" + err);
       });
 
     } else {
